@@ -1,6 +1,6 @@
 import 'package:e_commarce_app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import '../servieces/auth_service.dart';
+import '../../servieces/auth_service.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
