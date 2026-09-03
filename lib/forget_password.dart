@@ -103,7 +103,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
 
                     const SizedBox(height: 10),
-
+//--------------------------------------------------------------------------------------
                     // Description-----------------------------------------------------------------------
                     const Text(
                       'Enter your email to receive an OTP',
