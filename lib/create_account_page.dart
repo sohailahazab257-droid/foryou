@@ -128,7 +128,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
             ),
 
             // =========================
-            // الكلام والحقول فوق الصورة
+            // الكلام والحقول
             // =========================
             Positioned.fill(
               child: SingleChildScrollView(
