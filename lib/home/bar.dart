@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
                           width:50,height:50,
                           decoration:BoxDecoration(shape:BoxShape.circle),
                           child: ClipOval(
-                            child: Image.asset("assets/WhatsApp Image 2026-09-03 at 12.28.02 PM.jpeg",fit:BoxFit.cover,),
+                            child: Image.asset("assets/WhatsApp Image 2026-09-03 at 6.10.41 PM.jpeg",fit:BoxFit.cover,),
                           )),
                       SizedBox(width:10,),
                       Column(
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               children: [
                 Container(
                   width:double.infinity,height:double.infinity,
-                  decoration:BoxDecoration(image: DecorationImage(image: AssetImage("assets/background.png"),
+                  decoration:BoxDecoration(image: DecorationImage(image: AssetImage("assets/WhatsApp Image 2026-09-03 at 2.01.32 PM.jpeg"),
                     repeat:ImageRepeat.repeat,
                   )),
                 ),
