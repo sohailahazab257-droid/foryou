@@ -1,6 +1,7 @@
 
+import 'package:e_commarce_app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:foryou/constants/app_colors.dart';
+
 
 import '../servieces/auth_service.dart';
 import 'forget_password.dart';
