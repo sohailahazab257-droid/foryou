@@ -1,6 +1,8 @@
-import 'package:foryou/constants/app_colors.dart';
+
 import 'package:flutter/material.dart';
- import 'package:foryou/services/auth_service.dart';
+import 'package:foryou/constants/app_colors.dart';
+import 'package:foryou/services/auth_service.dart';
+
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
