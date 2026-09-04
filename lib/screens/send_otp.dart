@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foryou/constants/app_colors.dart';
 import 'package:foryou/services/auth_service.dart';
-
+import 'package:foryou/reset_password_page.dart';
 import 'dart:ui';
 class OtpScreen extends StatefulWidget {
 
@@ -60,7 +60,7 @@ class _OtpScreenState extends State<OtpScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ResetPassward(
+          builder: (context) => ResetPasswordPage(
             email: widget.email,
             otp: otp,
           ),
