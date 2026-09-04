@@ -51,20 +51,20 @@ class AuthService {
       },
     );
   }
-  static Future<void> resetPassword(
-      String email,
-      String newPassword,
-      String confirmPassword,
-      ) async {
-    await ApiServices.dio.post(
-      '/api/auth/reset-password',
-      data: {
-        'email': email,
-        'newPassword': newPassword,
-        'confirmPassword': confirmPassword,
-      },
-    );
-  }
+  // static Future<void> resetPassword(
+  //     String email,
+  //     String newPassword,
+  //     String confirmPassword,
+  //     ) async {
+  //   await ApiServices.dio.post(
+  //     '/api/auth/reset-password',
+  //     data: {
+  //       'email': email,
+  //       'newPassword': newPassword,
+  //       'confirmPassword': confirmPassword,
+  //     },
+  //   );
+  // }
 
 
   // VALIDATE OTP-------------------------------------------------------------
