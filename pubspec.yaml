@@ -54,20 +54,26 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
 assets:
- _assets:
    - assets/backgroundForLoginPage.jpeg
    - assets/WhatsApp Image 2026-09-03 at 2.01.32 PM.jpeg
    - assets/WhatsApp Image 2026-09-03 at 6.10.41 PM.jpeg
    - assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg
    - assets/WhatsApp Image 2026-09-03 at 10.39.56 PM.jpeg
+   - assets/splash_page.jpeg
+   - assets/WhatsApp Image 2026-09-05 at 12.30.16 AM.jpeg
+   - assets/WhatsApp Image 2026-09-05 at 12.39.11 AM.jpeg
+   - assets/WhatsApp Image 2026-09-05 at 12.59.03 AM.jpeg
+   - assets/WhatsApp Image 2026-09-05 at 1.06.04 AM.jpg
+   - assets/WhatsApp Image 2026-09-05 at 1.08.36 AM.jpg
+
+
+
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
