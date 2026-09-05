@@ -1,7 +1,9 @@
 import 'package:foryou/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:foryou/home/home.dart';
 import 'package:foryou/screens/create_account_page.dart';
 import 'package:foryou/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import 'forget_password.dart';
@@ -57,16 +59,22 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      // ================= CALL AUTH SERVICE =================
-
+      //CALL AUTH SERVICE------------------------------
       final response = await AuthService.login(
         email,
         passwordController.text.trim(),
       );
 
+
       // لو الصفحة اتقفلت أثناء الـ request
       if (!mounted) return;
-
+      // هحفظ بيانات اليوزر~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      final prefs = await SharedPreferences.getInstance();
+      // هحفظ ان اليوزر عمل Login
+      await prefs.setBool('is_logged_in', true);
+      await prefs.setString('access_toke', response.accessToken);
+      // هحفظ ال  Access Token
+      await prefs.setString('access_token', response.accessToken);
       // Login successful
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -80,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
 
       // هنا بعد كده ممكن نعمل navigation
       // Navigator.pushReplacement(...);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Home()));
 
     } catch (e) {
       if (!mounted) return;

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:foryou/constants/app_colors.dart';
 import 'package:foryou/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class CreateAccountPage extends StatefulWidget {
@@ -70,6 +71,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       return;
     }
 
+    
+
     setState(() {
       isLoading = true;
     });
@@ -84,6 +87,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         lastName,
         password,
       );
+// هحفظ اسم اليوزر
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString('user_name', '$firstName $lastName');
+
+      // هحفظ ان اليوزر عمل حساب
+      await prefs.setBool("has_account", true);
 
       _showMessage('Account created successfully');
     } catch (e) {
@@ -112,9 +122,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       body: SafeArea(
         child: Stack(
           children: [
-            // =========================
             // الصورة في الخلف تمامًا
-            // =========================
             Positioned.fill(
               child: Image.asset(
                 'assets/backgroundForLoginPage.jpeg',
@@ -122,16 +130,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               ),
             ),
 
-            // طبقة شفافة فوق الصورة
-            Positioned.fill(
-              child: Container(
-                color: Colors.black.withOpacity(0.25),
-              ),
-            ),
-
-            // =========================
             // الكلام والحقول
-            // =========================
             Positioned.fill(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(

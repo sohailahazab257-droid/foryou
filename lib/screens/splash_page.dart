@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:foryou/home/home.dart';
 import 'package:foryou/screens/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'onboarding_page.dart';
@@ -15,29 +16,41 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    checkOnboarding();
+    checkAppState();
+  }
 
-    Timer(const Duration(seconds: 3), () {
-      if (!mounted) return;
+  Future<void> checkAppState() async {
+    await Future.delayed(Duration(seconds: 3));
 
+    if (!mounted) return;
+
+    final prefs = await SharedPreferences.getInstance();
+
+    final onboardingSeen = prefs.getBool('onboarding_seen') ?? false;
+
+    final isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+
+    // يبقى اول مره يفتح الابلكيشن
+    if (!onboardingSeen) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => const OnboardingPage(),        ),
+        MaterialPageRoute(builder: (context) => const OnboardingPage()),
       );
-    });
-  }
-  Future<void>checkOnboarding()async{
-    await Future.delayed(Duration(seconds: 3));
-    if(!mounted) return;
-    final prefs = await SharedPreferences.getInstance();
-    final onboardingSeen = prefs.getBool('onboarding_seen')?? false;
-    if(onboardingSeen){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
-    }else{
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>OnboardingPage()));
     }
-
+    // لو اليوزر شاف onboardingو عمل log in خلاص
+    else if (isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+      );
+    }
+    // ال onboarding اتشاف بس اليوزر معملش log in
+    else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    }
   }
 
   @override
@@ -48,9 +61,7 @@ class _SplashPageState extends State<SplashPage> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-              'assets/splash_page.jpeg',
-            ),
+            image: AssetImage('assets/splash_page.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -82,10 +93,7 @@ class _SplashPageState extends State<SplashPage> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 120,
-                    child: Divider(color: Colors.grey),
-                  ),
+                  SizedBox(width: 120, child: Divider(color: Colors.grey)),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Icon(
@@ -94,10 +102,7 @@ class _SplashPageState extends State<SplashPage> {
                       size: 22,
                     ),
                   ),
-                  SizedBox(
-                    width: 120,
-                    child: Divider(color: Colors.grey),
-                  ),
+                  SizedBox(width: 120, child: Divider(color: Colors.grey)),
                 ],
               ),
 
@@ -105,18 +110,12 @@ class _SplashPageState extends State<SplashPage> {
 
               const Text(
                 'Everything you love,',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Color(0xff666666),
-                ),
+                style: TextStyle(fontSize: 20, color: Color(0xff666666)),
               ),
 
               const Text(
                 'made for you',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Color(0xff666666),
-                ),
+                style: TextStyle(fontSize: 20, color: Color(0xff666666)),
               ),
             ],
           ),
