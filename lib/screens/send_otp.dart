@@ -319,7 +319,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 color: Colors.white,
                                 fontSize: 16,
                                 decoration:
-                                TextDecoration.underline,
+                                TextDecoration.underline,decorationColor: Colors.white,
                               ),
                             ),
                           ),
@@ -343,7 +343,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             color: Colors.white,
                             fontSize: 17,
                             decoration:
-                            TextDecoration.underline,
+                            TextDecoration.underline,decorationColor: Colors.white
                           ),
                         ),
                       ),

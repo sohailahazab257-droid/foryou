@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import 'login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LatestOutfitPage extends StatelessWidget {
   const LatestOutfitPage({super.key});
@@ -46,7 +47,7 @@ class LatestOutfitPage extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Image.asset(
-                                      'صوره البنت اللي بجاكيت بني',
+                                      'assets/img1_latest_outfit_page.png',
                                       height: double.infinity,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
@@ -71,7 +72,7 @@ class LatestOutfitPage extends StatelessWidget {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(30),
                                           child: Image.asset(
-                                            'صوره الجواكيت',
+                                            'assets/img2_latest_outfit_page.png',
                                             width: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
@@ -92,7 +93,7 @@ class LatestOutfitPage extends StatelessWidget {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(30),
                                           child: Image.asset(
-                                            'صوره اللابتوب',
+                                            'assets/img3_latest_outfit_page.png',
                                             width: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
@@ -182,7 +183,10 @@ class LatestOutfitPage extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              final prefs = await SharedPreferences.getInstance();
+                              await prefs.setBool('onboarding_seen',true);
+                              if (!context.mounted)return;
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
