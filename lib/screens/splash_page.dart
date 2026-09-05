@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> checkAppState() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     if (!mounted) return;
 
@@ -69,24 +69,16 @@ class _SplashPageState extends State<SplashPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 270,
-                height: 270,
-                decoration: BoxDecoration(
-                  color: const Color(0xffd4edff),
-                  borderRadius: BorderRadius.circular(55),
-                ),
-                child: const Center(
-                  child: Text(
-                    'For You',
-                    style: TextStyle(
-                      fontSize: 55,
-                      color: Color(0xff79a9ee),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  'assets/for You Logo.png',
+                  width: 110,
+                  height: 110,
+                  fit: BoxFit.cover,
                 ),
               ),
+              // -------------------------------------------------------------------------
 
               const SizedBox(height: 25),
 

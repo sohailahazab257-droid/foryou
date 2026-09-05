@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foryou/home/home.dart';
+import 'package:foryou/screens/onboarding_page.dart';
 import 'package:foryou/screens/send_otp.dart';
 import 'screens/register_page.dart';
 import 'screens/login_page.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       
-      home: OtpScreen(email: 'test@gmail.com' ));
+      home: SplashPage()
+    );
   }
 }
