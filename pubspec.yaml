@@ -57,18 +57,19 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-assets:
-   - assets/backgroundForLoginPage.jpeg
-   - assets/WhatsApp Image 2026-09-03 at 2.01.32 PM.jpeg
-   - assets/WhatsApp Image 2026-09-03 at 6.10.41 PM.jpeg
-   - assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg
-   - assets/WhatsApp Image 2026-09-03 at 10.39.56 PM.jpeg
-   - assets/splash_page.jpeg
-   - assets/img1_onboarding.jpeg
-   - assets/img2_onboarding.jpeg
-   - assets/img1_discoverTreands.jpeg
-   - assets/img2_discoverTrends.jpeg
-   - assets/img3_discoverTrends.jpeg
+  assets:
+  - assets/
+#   - assets/backgroundForLoginPage.jpeg
+#   - assets/WhatsApp Image 2026-09-03 at 2.01.32 PM.jpeg
+#   - assets/WhatsApp Image 2026-09-03 at 6.10.41 PM.jpeg
+#   - assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg
+#   - assets/WhatsApp Image 2026-09-03 at 10.39.56 PM.jpeg
+#   - assets/splash_page.jpeg
+#   - assets/img1_onboarding.jpeg
+#   - assets/img2_onboarding.jpeg
+#   - assets/img1_discoverTreands.jpeg
+#   - assets/img2_discoverTrends.jpeg
+#   - assets/img3_discoverTrends.jpeg
 
 
 
