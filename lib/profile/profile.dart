@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:foryou/home/bar.dart';
+import 'package:foryou/screens/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
+
 class Profile extends StatelessWidget {
   const Profile({super.key});
   @override
@@ -227,7 +232,19 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 25,),
-                  Container(
+              GestureDetector(
+                  onTap: () async {
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.clear();
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
                     width:400,height:45,
                     margin: EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
@@ -246,8 +263,10 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                   ),
-                ],
-              )),
+              ),
+            ]
+          ),
+      ),
           bottomNavigationBar: const Bar(
             currentPage: 'profile',)),
     );
