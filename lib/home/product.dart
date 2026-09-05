@@ -11,46 +11,77 @@ class CategoriesProducts extends StatefulWidget {
 }
 
 class _CategoriesProductsState extends State<CategoriesProducts> {
-  final String productsUrl = 'https://dummyjson.com/products';
   List<dynamic> products = [];
   String selectedCategory = 'All';
   bool isLoading = true;
-
-  final Map<String, List<String>> categoryGroups = {
-    'Women': ['womens-dresses'],
-    'Men': ['mens-shirts'],
-    'Kids': ['tops'],
-    'Accessories': [
-      'womens-jewellery',
-      'womens-watches',
-      'mens-watches',
-      'sunglasses'
-    ],
-    'Makeup & Skin Care': [
-      'beauty',
-      'skin-care',
-      'fragrances'
-    ],
-    'Shoes & Bags': [
-      'womens-shoes',
-      'womens-bags',
-      'mens-shoes'
-    ],
+  final Map<String, String> categories = {
+    'Women': 'womens-dresses',
+    'Men': 'mens-shirts',
+    'Kids': 'tops',
+    'Jewellery': 'womens-jewellery',
+    'Women Watches': 'womens-watches',
+    'Men Watches': 'mens-watches',
+    'Sunglasses': 'sunglasses',
+    'Beauty': 'beauty',
+    'Skin Care': 'skin-care',
+    'Fragrances': 'fragrances',
+    'Women Shoes': 'womens-shoes',
+    'Women Bags': 'womens-bags',
+    'Men Shoes': 'mens-shoes',
   };
 
-  Future<void> getData() async {
+  Future<void> getData(String category) async {
+    setState(() {
+      isLoading = true;
+    });
+
     try {
-      final productsResponse = await http.get(Uri.parse(productsUrl));
-      if (productsResponse.statusCode == 200) {
-        final productsData = jsonDecode(productsResponse.body);
+      if (category == 'All') {
+        List<dynamic> allProducts = [];
+
+        for (final categoryValue in categories.values) {
+          final response = await http.get(
+            Uri.parse(
+              'https://dummyjson.com/products/category/$categoryValue',
+            ),
+          );
+
+          if (response.statusCode == 200) {
+            final data = jsonDecode(response.body);
+            allProducts.addAll(data['products']);
+          }
+        }
+
         setState(() {
-          products = productsData['products'];
+          products = allProducts;
           isLoading = false;
         });
+      } else {
+        final response = await http.get(
+          Uri.parse(
+            'https://dummyjson.com/products/category/$category',
+          ),
+        );
+
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+
+          setState(() {
+            products = data['products'];
+            isLoading = false;
+          });
+        } else {
+          setState(() {
+            products = [];
+            isLoading = false;
+          });
+        }
       }
     } catch (e) {
       print(e);
+
       setState(() {
+        products = [];
         isLoading = false;
       });
     }
@@ -58,22 +89,7 @@ class _CategoriesProductsState extends State<CategoriesProducts> {
   @override
   void initState() {
     super.initState();
-    getData();
-  }
-
-  List<dynamic> get filteredProducts {
-    if (selectedCategory == 'All') {
-      return products.where((product) {
-        return categoryGroups.values
-            .expand((categories) => categories)
-            .contains(product['category']);
-      }).toList();
-    }
-    final selectedCategories = categoryGroups[selectedCategory] ?? [];
-
-    return products.where((product) {
-      return selectedCategories.contains(product['category']);
-    }).toList();
+    getData('All');
   }
 
   Widget categoryButton({
@@ -81,22 +97,27 @@ class _CategoriesProductsState extends State<CategoriesProducts> {
     required String categoryValue,
   }) {
     final bool isSelected = selectedCategory == categoryValue;
-
     return GestureDetector(
       onTap: () {
         setState(() {
           selectedCategory = categoryValue;
         });
+        getData(categoryValue);
       },
       child: Container(
         margin: const EdgeInsets.only(right: 2, left: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 8,
+        ),
         decoration: BoxDecoration(
           color: isSelected
               ? const Color(0xffC9ECFF)
               : Colors.white.withOpacity(0.4),
           borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.blue.shade100),
+          border: Border.all(
+            color: Colors.blue.shade100,
+          ),
         ),
         child: Text(
           name,
@@ -113,11 +134,6 @@ class _CategoriesProductsState extends State<CategoriesProducts> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -129,10 +145,10 @@ class _CategoriesProductsState extends State<CategoriesProducts> {
                 name: 'All',
                 categoryValue: 'All',
               ),
-              ...categoryGroups.keys.map((category) {
+              ...categories.keys.map((category) {
                 return categoryButton(
                   name: category,
-                  categoryValue: category,
+                  categoryValue: categories[category]!,
                 );
               }).toList(),
             ],
@@ -152,24 +168,41 @@ class _CategoriesProductsState extends State<CategoriesProducts> {
           ],
         ),
         const SizedBox(height: 15),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: filteredProducts.length,
-          gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 15,
-            childAspectRatio: 0.70,
+        if (isLoading)
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.all(30),
+              child: CircularProgressIndicator(),
+            ),
+          )
+        else if (products.isEmpty)
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.all(30),
+              child: Text(
+                'No products found',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ) else GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: products.length,
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 15,
+              childAspectRatio: 0.70,
+            ),
+            itemBuilder: (context, index) {
+              final product = products[index];
+              return ProductCard(
+                product: product,
+              );
+            },
           ),
-          itemBuilder: (context, index) {
-            final product = filteredProducts[index];
-
-            return ProductCard(
-              product: product,
-            );
-          },
-        ),
       ],
     );
   }
@@ -184,7 +217,6 @@ class ProductCard extends StatefulWidget {
   @override
   State<ProductCard> createState() => _ProductCardState();
 }
-
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
@@ -192,7 +224,10 @@ class _ProductCardState extends State<ProductCard> {
     final isFavorite = ProductLogic.isFavorite(product);
     final isInCart = ProductLogic.isInCart(product);
     return Container(
-      margin: const EdgeInsets.only(right: 12, left: 12),
+      margin: const EdgeInsets.only(
+        right: 12,
+        left: 12,
+      ),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.7),
         borderRadius: BorderRadius.circular(25),
@@ -210,7 +245,7 @@ class _ProductCardState extends State<ProductCard> {
               child: Image.network(
                 product['thumbnail'],
                 width: double.infinity,
-                height: 145,
+                height: 140,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -250,8 +285,7 @@ class _ProductCardState extends State<ProductCard> {
                     color: const Color(0xffC9ECFF),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(
-                    '\$${product['price']}',
+                  child: Text('\$${product['price']}',
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -269,9 +303,10 @@ class _ProductCardState extends State<ProductCard> {
                   size: 18,
                 ),
                 const SizedBox(width: 3),
-                Text(
-                  '${product['rating']}',
-                  style: const TextStyle(fontSize: 13),
+                Text('${product['rating']}',
+                  style: const TextStyle(
+                    fontSize: 13,
+                  ),
                 ),
               ],
             ),
@@ -284,7 +319,8 @@ class _ProductCardState extends State<ProductCard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ProductDetails(),
+                          builder: (context) =>
+                          const ProductDetails(),
                         ),
                       );
                     },
@@ -313,7 +349,9 @@ class _ProductCardState extends State<ProductCard> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
-                      isInCart ? Icons.check : Icons.add,
+                      isInCart
+                          ? Icons.check
+                          : Icons.add,
                       size: 21,
                     ),
                   ),
