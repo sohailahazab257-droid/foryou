@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:foryou/home/home.dart';
+import 'package:foryou/screens/home.dart';
+
 import 'package:foryou/screens/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'onboarding_page.dart';
