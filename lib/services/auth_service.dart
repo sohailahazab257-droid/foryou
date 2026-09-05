@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/login_response_model.dart';
+import '../models/login_response_model.dart';
 import 'api_services.dart';
 
 class AuthService {

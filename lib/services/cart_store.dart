@@ -15,6 +15,9 @@ class CartStore extends ChangeNotifier {
 
   bool isFavorite(ProductModel product) => _favoriteIds.contains(product.id);
 
+  bool isInCart(ProductModel product) =>
+      _items.any((item) => item.id == product.id);
+
   void addToCart(ProductModel product) {
     _items.add(product);
     notifyListeners();

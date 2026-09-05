@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:foryou/home/home.dart';
-import 'package:foryou/profile/profile.dart';
+import 'package:foryou/screens/home.dart';
+import 'package:foryou/screens/profile.dart';
 import 'package:foryou/screens/cart.dart';
 import 'package:foryou/screens/category.dart';
 

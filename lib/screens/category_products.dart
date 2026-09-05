@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foryou/models/product_model.dart';
-import 'package:foryou/screens/product_details.dart';
-import 'package:foryou/screens/cart.dart';
-import 'package:foryou/services/all_porducts.dart';
-import 'package:foryou/widgets/item_card.dart';
+import 'package:foryou/screens/favorit.dart';
 
-class CategoryProducts extends StatelessWidget {
+import 'package:foryou/services/all_porducts.dart';
+
+import 'package:foryou/widgets/product.dart';
+
+class CategoryProducts extends StatefulWidget {
   const CategoryProducts({
     required this.categoryName,
     required this.categorySlug,
@@ -15,6 +16,11 @@ class CategoryProducts extends StatelessWidget {
   final String categoryName;
   final String categorySlug;
 
+  @override
+  State<CategoryProducts> createState() => _CategoryProductsState();
+}
+
+class _CategoryProductsState extends State<CategoryProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,23 +39,37 @@ class CategoryProducts extends StatelessWidget {
             color: Colors.white.withValues(alpha: 0.6),
             borderRadius: BorderRadius.circular(22),
           ),
-          child: Text(categoryName, style: const TextStyle(fontSize: 16)),
+          child: Text(
+            widget.categoryName,
+            style: const TextStyle(fontSize: 16),
+          ),
         ),
         actions: [
-          IconButton(
-            tooltip: 'Cart',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Cart()),
-              );
-            },
-            icon: const Icon(Icons.shopping_cart_outlined),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xffd4edff),
+                border: Border.all(color: const Color(0xff89b9f8), width: 1),
+              ),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Fav()),
+                  );
+                },
+                icon: const Icon(Icons.bookmark, color: Color(0xff89b9f8)),
+              ),
+            ),
           ),
         ],
       ),
       body: FutureBuilder<List<ProductModel>>(
-        future: AllPorducts().get_products_by_category(categorySlug),
+        future: AllPorducts().get_products_by_category(widget.categorySlug),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text('Failed to load products'));
@@ -68,17 +88,7 @@ class CategoryProducts extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               final product = products[index];
-              return ItemCard(
-                porduct: product,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductDetails(product: product),
-                    ),
-                  );
-                },
-              );
+              return ProductCard(product: product);
             },
           );
         },

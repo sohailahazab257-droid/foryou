@@ -1,10 +1,19 @@
+import 'package:foryou/models/product_model.dart';
+
 class ProductLogic {
   static final List<dynamic> favoriteProducts = [];
   static final List<dynamic> cartProducts = [];
 
+  static int _productId(dynamic product) {
+    if (product is ProductModel) {
+      return product.id;
+    }
+    return product['id'] as int;
+  }
+
   static void toggleFavorite(dynamic product) {
     final index = favoriteProducts.indexWhere(
-          (item) => item['id'] == product['id'],
+      (item) => _productId(item) == _productId(product),
     );
 
     if (index != -1) {
@@ -16,13 +25,13 @@ class ProductLogic {
 
   static bool isFavorite(dynamic product) {
     return favoriteProducts.any(
-          (item) => item['id'] == product['id'],
+      (item) => _productId(item) == _productId(product),
     );
   }
 
   static void addToCart(dynamic product) {
     final exists = cartProducts.any(
-          (item) => item['id'] == product['id'],
+      (item) => _productId(item) == _productId(product),
     );
 
     if (!exists) {
@@ -31,8 +40,6 @@ class ProductLogic {
   }
 
   static bool isInCart(dynamic product) {
-    return cartProducts.any(
-          (item) => item['id'] == product['id'],
-    );
+    return cartProducts.any((item) => _productId(item) == _productId(product));
   }
 }

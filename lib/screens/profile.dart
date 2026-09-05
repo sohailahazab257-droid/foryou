@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foryou/home/bar.dart';
+import 'package:foryou/widgets/bar.dart';
 class Profile extends StatelessWidget {
   const Profile({super.key});
   @override

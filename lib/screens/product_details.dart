@@ -38,6 +38,8 @@ class ProductDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
+            _RatingStars(rating: product.rating),
+            const SizedBox(height: 8),
             Align(
               alignment: AlignmentGeometry.centerRight,
               child: Text(
@@ -64,6 +66,37 @@ class ProductDetails extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _RatingStars extends StatelessWidget {
+  const _RatingStars({required this.rating});
+
+  final double rating;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        ...List.generate(5, (index) {
+          final starValue = index + 1;
+          IconData icon;
+          if (rating >= starValue) {
+            icon = Icons.star;
+          } else if (rating >= starValue - 0.5) {
+            icon = Icons.star_half;
+          } else {
+            icon = Icons.star_border;
+          }
+          return Icon(icon, color: Colors.amber, size: 20);
+        }),
+        const SizedBox(width: 6),
+        Text(
+          rating.toStringAsFixed(1),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+      ],
     );
   }
 }

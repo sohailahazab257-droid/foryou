@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foryou/home/product.dart';
-import 'package:foryou/home/bar.dart';
-import 'package:foryou/favorit/favorit.dart';
+import 'package:foryou/widgets/product.dart';
+import 'package:foryou/widgets/bar.dart';
+import 'package:foryou/screens/favorit.dart';
 void main() {
   runApp(const Home());
 }

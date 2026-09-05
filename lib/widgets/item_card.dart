@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:foryou/logic/product_logic.dart';
 
 import 'package:foryou/services/cart_store.dart';
 import 'package:foryou/models/product_model.dart';
 
 class ItemCard extends StatelessWidget {
-  const ItemCard({required this.porduct, required this.onTap, super.key});
+  const ItemCard({required this.product, required this.onTap, super.key});
 
-  final ProductModel porduct;
+  final ProductModel product;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final isFavorite = ProductLogic.isFavorite(product);
     return Card(
       margin: const EdgeInsets.all(6),
       elevation: 0,
@@ -31,36 +33,26 @@ class ItemCard extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.topRight,
-                    child: ListenableBuilder(
-                      listenable: CartStore.instance,
-                      builder: (context, child) {
-                        final isFavorite = CartStore.instance.isFavorite(
-                          porduct,
-                        );
-                        return IconButton(
-                          tooltip: 'Favorite',
-                          visualDensity: VisualDensity.compact,
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          onPressed: () {
-                            CartStore.instance.toggleFavorite(porduct);
-                          },
-                          icon: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavorite
-                                ? const Color(0xffff7898)
-                                : const Color(0xffcbd5d8),
-                            size: 25,
-                          ),
-                        );
+                    child: IconButton(
+                      tooltip: 'Favorite',
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(),
+                      onPressed: () {
+                        ProductLogic.toggleFavorite(product);
                       },
+                      icon: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: Colors.pinkAccent,
+                        size: 27,
+                      ),
                     ),
                   ),
 
                   ClipRRect(
                     borderRadius: BorderRadius.circular(14),
                     child: Image.network(
-                      porduct.thumbnail,
+                      product.thumbnail,
                       height: 112,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -74,7 +66,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    '${porduct.stock} Stocks Left',
+                    '${product.stock} Stocks Left',
                     style: const TextStyle(
                       color: Color(0xfff13d68),
                       fontSize: 9,
@@ -85,7 +77,7 @@ class ItemCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 14),
                       Text(
-                        ' ${porduct.rating.toStringAsFixed(1)}',
+                        ' ${product.rating.toStringAsFixed(1)}',
                         style: const TextStyle(fontSize: 10),
                       ),
                       const Spacer(),
@@ -100,7 +92,7 @@ class ItemCard extends StatelessWidget {
                             vertical: 3,
                           ),
                           child: Text(
-                            '\$${porduct.price.toStringAsFixed(0)}',
+                            '\$${product.price.toStringAsFixed(0)}',
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -112,7 +104,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    porduct.title,
+                    product.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -130,7 +122,7 @@ class ItemCard extends StatelessWidget {
               child: IconButton(
                 tooltip: 'Add to cart',
                 onPressed: () {
-                  CartStore.instance.addToCart(porduct);
+                  CartStore.instance.addToCart(product);
                 },
                 style: IconButton.styleFrom(
                   backgroundColor: const Color(0xffffb5c8),
