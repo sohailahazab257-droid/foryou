@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foryou/home/home.dart';
-import 'package:foryou/screens/onboarding_page.dart';
-import 'package:foryou/screens/send_otp.dart';
-import 'screens/register_page.dart';
-import 'screens/login_page.dart';
-import 'screens/create_account_page.dart';
 import 'screens/splash_page.dart';
 
 void main() {
@@ -18,8 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
-      home: SplashPage()
+
+        home: SplashPage()
     );
   }
 }
