@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:foryou/screens/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'onboarding_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -13,6 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    checkOnboarding();
 
     Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
@@ -23,6 +26,18 @@ class _SplashPageState extends State<SplashPage> {
           builder: (context) => const OnboardingPage(),        ),
       );
     });
+  }
+  Future<void>checkOnboarding()async{
+    await Future.delayed(Duration(seconds: 3));
+    if(!mounted) return;
+    final prefs = await SharedPreferences.getInstance();
+    final onboardingSeen = prefs.getBool('onboarding_seen')?? false;
+    if(onboardingSeen){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+    }else{
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>OnboardingPage()));
+    }
+
   }
 
   @override

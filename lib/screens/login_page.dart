@@ -1,5 +1,6 @@
 import 'package:foryou/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:foryou/screens/create_account_page.dart';
 import 'package:foryou/services/auth_service.dart';
 
 
@@ -20,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool obscurePassword = true;
 
-  // ================= LOGIN =================
+  //LOGIN-------------------------------------------------------
 
   Future<void> login() async {
     // نتأكد إن البيانات مش فاضية
@@ -412,6 +413,8 @@ class _LoginPageState extends State<LoginPage> {
                           GestureDetector(
                             onTap: () {
                               // هنا هنفتح Register Screen
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => CreateAccountPage()));
                             },
                             child: const Text(
                               'Sign Up',

@@ -385,7 +385,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                               style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: Colors.blueAccent,
                               ),
                             ),
                             SizedBox(width: 20),
