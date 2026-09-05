@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'register_page.dart';
+import 'screens/register_page.dart';
 import 'screens/login_page.dart';
-import 'create_account_page.dart';
-
+import 'screens/create_account_page.dart';
+import 'screens/splash_page.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const LoginPage (),
+      home: const SplashPage(),
     );
   }
 }
