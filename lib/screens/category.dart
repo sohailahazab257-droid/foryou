@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foryou/home/bar.dart';
 import 'package:foryou/services/all_categories.dart';
 import 'package:foryou/screens/category_products.dart';
 import 'package:foryou/screens/cart.dart';
@@ -91,6 +92,7 @@ class Category extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const Bar(currentPage: 'categories'),
     );
   }
 }

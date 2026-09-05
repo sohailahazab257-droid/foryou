@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foryou/home/bar.dart';
 import 'package:foryou/services/cart_store.dart';
 import 'package:foryou/widgets/orderbutton.dart';
 
@@ -91,6 +92,7 @@ class Cart extends StatelessWidget {
           );
         },
       ),
+      bottomNavigationBar: const Bar(currentPage: 'cart'),
     );
   }
 }

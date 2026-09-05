@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:foryou/cart/cart.dart';
-import 'package:foryou/categores/categores.dart';
+
 import 'package:foryou/home/home.dart';
 import 'package:foryou/profile/profile.dart';
+import 'package:foryou/screens/cart.dart';
+import 'package:foryou/screens/category.dart';
 
 class Bar extends StatelessWidget {
   final String currentPage;
 
-  const Bar({
-    super.key,
-    required this.currentPage,
-  });
+  const Bar({super.key, required this.currentPage});
   @override
-
   Widget build(BuildContext context) {
     return Container(
       height: 70,
@@ -32,9 +29,7 @@ class Bar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const Profile(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const Profile()),
                 );
               },
               icon: const Icon(Icons.person),
@@ -48,9 +43,7 @@ class Bar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const Home(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const Home()),
                 );
               },
               icon: const Icon(Icons.home),
@@ -64,9 +57,7 @@ class Bar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const Cate(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const Category()),
                 );
               },
               icon: const Icon(Icons.category),
@@ -80,9 +71,7 @@ class Bar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const Cart(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const Cart()),
                 );
               },
               icon: const Icon(Icons.shopping_cart),
