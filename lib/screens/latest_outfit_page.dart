@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'discover_trends_page.dart';
+import '../constants/app_colors.dart';
+import 'login_page.dart';
 
-class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({super.key});
+class LatestOutfitPage extends StatelessWidget {
+  const LatestOutfitPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,8 @@ class OnboardingPage extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xffEAF8FF),
-              Color(0xffDDF3FF),
+              AppColors.secondary,
+              AppColors.primary,
             ],
           ),
         ),
@@ -24,7 +25,7 @@ class OnboardingPage extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight: constraints.maxHeight,
@@ -32,13 +33,12 @@ class OnboardingPage extends StatelessWidget {
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20),
 
-                        // معرض الصور
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          padding: EdgeInsets.symmetric(horizontal: 25),
                           child: SizedBox(
-                            height: 380, // تقليل الارتفاع يناسب مختلف الشاشات
+                            height: 380,
                             child: Row(
                               children: [
                                 Expanded(
@@ -46,19 +46,23 @@ class OnboardingPage extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Image.asset(
-                                      'assets/img1_onboarding.jpeg',
+                                      'صوره البنت اللي بجاكيت بني',
                                       height: double.infinity,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
                                         return Container(
-                                          color: Colors.grey[300],
-                                          child: const Icon(Icons.image, size: 50),
+                                          color: AppColors.lightGrey,
+                                          child: Icon(
+                                            Icons.image,
+                                            size: 50,
+                                            color: AppColors.grey,
+                                          ),
                                         );
                                       },
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12),
                                 Expanded(
                                   flex: 4,
                                   child: Column(
@@ -67,13 +71,17 @@ class OnboardingPage extends StatelessWidget {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(30),
                                           child: Image.asset(
-                                            'assets/img2_onboarding.jpeg',
+                                            'صوره الجواكيت',
                                             width: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
                                               return Container(
-                                                color: Colors.grey[300],
-                                                child: const Icon(Icons.image, size: 40),
+                                                color: AppColors.lightGrey,
+                                                child: const Icon(
+                                                  Icons.image,
+                                                  size: 40,
+                                                  color: AppColors.grey,
+                                                ),
                                               );
                                             },
                                           ),
@@ -84,13 +92,17 @@ class OnboardingPage extends StatelessWidget {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(30),
                                           child: Image.asset(
-                                            'assets/img3_onboarding.jpeg',
+                                            'صوره اللابتوب',
                                             width: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
                                               return Container(
-                                                color: Colors.grey[300],
-                                                child: const Icon(Icons.image, size: 40),
+                                                color: AppColors.lightGrey,
+                                                child: const Icon(
+                                                  Icons.image,
+                                                  size: 40,
+                                                  color: AppColors.grey,
+                                                ),
                                               );
                                             },
                                           ),
@@ -104,81 +116,77 @@ class OnboardingPage extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(height: 30),
+                        SizedBox(height: 30),
 
-                        // مؤشرات الصفحات
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
+                              width: 35,
+                              height: 7,
+                              decoration: BoxDecoration(
+                                color: AppColors.grey,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            SizedBox(width: 12),
+                            Container(
+                              width: 35,
+                              height: 7,
+                              decoration: BoxDecoration(
+                                color: AppColors.grey,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            SizedBox(width: 12),
+                            Container(
                               width: 55,
                               height: 7,
                               decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Container(
-                              width: 35,
-                              height: 7,
-                              decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Container(
-                              width: 35,
-                              height: 7,
-                              decoration: BoxDecoration(
-                                color: Colors.grey,
+                                color: AppColors.dark,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ],
                         ),
 
-                        const SizedBox(height: 30),
+                        SizedBox(height: 30),
 
-                        // العنوان
-                        const Text(
-                          'Your Own Style',
+
+                        Text(
+                          'Latest Outfit',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: AppColors.dark,
                           ),
                         ),
 
-                        const SizedBox(height: 12),
-
-                        // الوصف
-                        const Padding(
+                        SizedBox(height: 12),
+                        Padding(
                           padding: EdgeInsets.symmetric(horizontal: 35),
                           child: Text(
-                            'Smart, gorgeous & fashionable\ncollection makes you cool',
+                            'Express your self though the art of\nthe fashionism',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18,
-                              color: Colors.black54,
+                              color: AppColors.grey,
                               height: 1.4,
                             ),
                           ),
                         ),
 
-                        const Spacer(),
+                        Spacer(),
 
-                        // زر السهم
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          padding: EdgeInsets.symmetric(vertical: 20),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const DiscoverTrendsPage(),
+                                  builder: (context) => LoginPage(),
                                 ),
                               );
                             },
@@ -187,13 +195,13 @@ class OnboardingPage extends StatelessWidget {
                               height: 100,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: const Color(0xff8FC5F5),
+                                color: AppColors.primary,
                                 border: Border.all(
-                                  color: const Color(0xffC9E3FF),
+                                  color: AppColors.secondary,
                                   width: 12,
                                 ),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.arrow_forward,
                                 size: 45,
                                 color: Colors.white,
