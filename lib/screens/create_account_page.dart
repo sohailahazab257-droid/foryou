@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:foryou/constants/app_colors.dart';
 import 'package:foryou/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:foryou/screens/verify_email_otp.dart';
 
 
 class CreateAccountPage extends StatefulWidget {
@@ -71,7 +71,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       return;
     }
 
-    
+
 
     setState(() {
       isLoading = true;
@@ -95,7 +95,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       // هحفظ ان اليوزر عمل حساب
       await prefs.setBool("has_account", true);
 
-      _showMessage('Account created successfully');
+      //_showMessage('Account created successfully');
+      Navigator.push(context,MaterialPageRoute(builder: (context) => VerifyEmailScreen(
+        email: email,
+      )));
+
     } catch (e) {
       debugPrint('REGISTER ERROR: $e');
       _showMessage('Registration failed: $e');
