@@ -91,6 +91,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       final prefs = await SharedPreferences.getInstance();
 
       await prefs.setString('user_name', '$firstName $lastName');
+      // هحفظ الايميل
+      await prefs.setString('user_email', email,);
+
 
       // هحفظ ان اليوزر عمل حساب
       await prefs.setBool("has_account", true);
