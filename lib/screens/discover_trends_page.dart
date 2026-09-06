@@ -46,8 +46,9 @@ class DiscoverTrendsPage extends StatelessWidget {
                                   flex: 5,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
-                                    child: Image.asset(
-                                      'assets/img1_discoverTreands.jpeg',
+                                    child:
+                                    Image.asset(
+                                      'assets/img1_discoverTrends.jpg',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
@@ -68,8 +69,9 @@ class DiscoverTrendsPage extends StatelessWidget {
                                       Expanded(
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(30),
-                                          child: Image.asset(
-                                            'assets/img2_discoverTrends.jpeg',
+                                          child:
+                                          Image.asset(
+                                            'assets/img2_discoverTrends.jpg',
                                             height: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
@@ -85,8 +87,9 @@ class DiscoverTrendsPage extends StatelessWidget {
                                       Expanded(
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(30),
-                                          child: Image.asset(
-                                            'assets/img3_discoverTrends.jpeg',
+                                          child:
+                                          Image.asset(
+                                            'assets/img3_discoverTrends.jpg',
                                             height: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
