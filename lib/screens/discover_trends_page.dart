@@ -48,7 +48,7 @@ class DiscoverTrendsPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(30),
                                     child:
                                     Image.asset(
-                                      'assets/img1_discoverTrends.jpg',
+                                      'assets/img1_discoverTreands.jpeg',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
@@ -71,7 +71,7 @@ class DiscoverTrendsPage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(30),
                                           child:
                                           Image.asset(
-                                            'assets/img2_discoverTrends.jpg',
+                                            'assets/img2_discoverTrends.jpeg',
                                             height: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
@@ -89,7 +89,7 @@ class DiscoverTrendsPage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(30),
                                           child:
                                           Image.asset(
-                                            'assets/img3_discoverTrends.jpg',
+                                            'assets/img3_discoverTrends.jpeg',
                                             height: double.infinity,
                                             fit: BoxFit.cover,
                                             errorBuilder: (context, error, stackTrace) {
