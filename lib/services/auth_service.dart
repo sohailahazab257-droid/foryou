@@ -17,6 +17,9 @@ class AuthService {
       },
     );
 
+    print('LOGIN STATUS: ${response.statusCode}');
+    print('LOGIN RESPONSE: ${response.data}');
+
     return LoginResponse.fromJson(response.data);
   }
 
@@ -39,7 +42,6 @@ class AuthService {
       },
     );
   }
-
 
   //FORGOT PASSWORD ---------------------------------------
 
@@ -81,7 +83,19 @@ class AuthService {
       },
     );
   }
-
+//email
+  static Future<void> verifyEmail(
+      String email,
+      String otp,
+      ) async {
+    await ApiServices.dio.post(
+      '/api/auth/verify-email',
+      data: {
+        'email': email,
+        'otp': otp,
+      },
+    );
+  }
 
   //RESEND OTP=---------------------------------------------
 

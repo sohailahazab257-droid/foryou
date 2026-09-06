@@ -10,7 +10,6 @@ class ApiServices {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
-
       )
   );
 }
