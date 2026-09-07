@@ -9,7 +9,7 @@ class Category extends StatelessWidget {
   static final List<Map<String, dynamic>> _categories = [
     {
       'name': 'Women',
-      'slug': 'women-dresses',
+      'slug': 'womens-dresses',
       'icon': Icons.woman,
       'colors': [Color(0xFFF9D9D9), Color(0xFFFFF5F5)],
     },
@@ -27,7 +27,7 @@ class Category extends StatelessWidget {
     },
     {
       'name': 'Accessories',
-      'slug': 'women-jewellery',
+      'slug': 'womens-jewellery',
       'icon': Icons.diamond_outlined,
       'colors': [Color(0xFFD9F9E3), Color(0xFFF0FFF5)],
     },
@@ -39,7 +39,7 @@ class Category extends StatelessWidget {
     },
     {
       'name': 'Shoes & Bags',
-      'slug': 'women-shoes',
+      'slug': 'womens-shoes',
       'icon': Icons.shopping_bag,
       'colors': [Color(0xFFF9F3D9), Color(0xFFFFFDF0)],
     },
