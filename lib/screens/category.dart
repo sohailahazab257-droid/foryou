@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foryou/screens/favorit.dart';
 import 'package:foryou/widgets/bar.dart';
 import 'package:foryou/screens/category_products.dart';
-import 'package:foryou/screens/cart.dart';
 
 class Category extends StatelessWidget {
   const Category({super.key});
@@ -10,7 +9,7 @@ class Category extends StatelessWidget {
   static final List<Map<String, dynamic>> _categories = [
     {
       'name': 'Women',
-      'slug': 'womens-dresses',
+      'slug': 'women-dresses',
       'icon': Icons.woman,
       'colors': [Color(0xFFF9D9D9), Color(0xFFFFF5F5)],
     },
@@ -28,7 +27,7 @@ class Category extends StatelessWidget {
     },
     {
       'name': 'Accessories',
-      'slug': 'womens-jewellery',
+      'slug': 'women-jewellery',
       'icon': Icons.diamond_outlined,
       'colors': [Color(0xFFD9F9E3), Color(0xFFF0FFF5)],
     },
@@ -40,7 +39,7 @@ class Category extends StatelessWidget {
     },
     {
       'name': 'Shoes & Bags',
-      'slug': 'womens-shoes',
+      'slug': 'women-shoes',
       'icon': Icons.shopping_bag,
       'colors': [Color(0xFFF9F3D9), Color(0xFFFFFDF0)],
     },
@@ -49,10 +48,11 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffd9efff),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       appBar: AppBar(
-        backgroundColor: const Color(0xffd9efff),
         title: const Text('Categories'),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
@@ -61,51 +61,78 @@ class Category extends StatelessWidget {
               height: 50,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xffd4edff),
-                border: Border.all(color: const Color(0xff89b9f8), width: 1),
+                color: Colors.white,
+
+                border: Border.all(
+                  color: const Color(0xff89b9f8),
+                  width: 1,
+                ),
               ),
               child: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Fav()),
+                    MaterialPageRoute(
+                      builder: (context) => Fav(),
+                    ),
                   );
                 },
-                icon: const Icon(Icons.bookmark, color: Color(0xff89b9f8)),
+                icon: const Icon(
+                  Icons.bookmark,
+                  color: Color(0xff89b9f8),
+                ),
               ),
             ),
           ),
         ],
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(8),
+
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 20,
+              ),
+
               child: TextFormField(
                 decoration: InputDecoration(
-                  hint: const Text('Which category you need ?'),
+                  hintText: 'Which category you need ?',
                   prefixIcon: const Icon(Icons.search),
+
+                  // 🤍 مربع البحث أبيض
+                  filled: true,
+                  fillColor: Colors.white,
+
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
             ),
+
             Expanded(
               child: GridView.builder(
                 itemCount: _categories.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 1.1,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
+
                 itemBuilder: (context, index) {
                   final category = _categories[index];
+
                   return InkWell(
                     borderRadius: BorderRadius.circular(20),
+
                     onTap: () {
                       Navigator.push(
                         context,
@@ -117,6 +144,7 @@ class Category extends StatelessWidget {
                         ),
                       );
                     },
+
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -125,6 +153,7 @@ class Category extends StatelessWidget {
                           end: Alignment.bottomCenter,
                           colors: category['colors'],
                         ),
+
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.2),
@@ -133,21 +162,27 @@ class Category extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+
                         children: [
                           Icon(
                             category['icon'],
                             size: 50,
                             color: Colors.black87,
                           ),
+
                           const SizedBox(height: 10),
+
                           Text(
                             category['name'],
                             textAlign: TextAlign.center,
+
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
+                              color: Colors.black,
                             ),
                           ),
                         ],
@@ -160,7 +195,10 @@ class Category extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const Bar(currentPage: 'categories'),
+
+      bottomNavigationBar: const Bar(
+        currentPage: 'categories',
+      ),
     );
   }
 }
