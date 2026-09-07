@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:foryou/constants/app_colors.dart';
+import 'package:foryou/screens/send_otp.dart';
 import 'package:foryou/services/auth_service.dart';
-
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -18,11 +17,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Future<void> sendResetLink() async {
     if (emailController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter your email'),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please enter your email')));
       return;
     }
 
@@ -31,25 +28,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     });
 
     try {
-      await AuthService.forgotPassword(
-        emailController.text.trim(),
-      );
+      await AuthService.forgotPassword(emailController.text.trim());
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Reset password link sent successfully'),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return sendotp(email: emailController.text.trim());
+          },
         ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Reset password link sent successfully')),
       );
     } catch (e) {
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Something went wrong'),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Something went wrong')));
     } finally {
       if (mounted) {
         setState(() {
@@ -73,12 +72,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-
           // Background----------------------------------------------------------------------------
-          Image.asset(
-            'assets/backgroundForLoginPage.jpeg',
-            fit: BoxFit.cover,
-          ),
+          Image.asset('assets/backgroundForLoginPage.jpeg', fit: BoxFit.cover),
 
           // Content----------------------------------------------------------------------------------
           SafeArea(
@@ -90,7 +85,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 child: Column(
                   children: [
-
                     const SizedBox(height: 70),
 
                     // Forgot Password---------------------------------------------------------------
@@ -105,15 +99,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
 
                     const SizedBox(height: 10),
-//--------------------------------------------------------------------------------------
+                    //--------------------------------------------------------------------------------------
                     // Description-----------------------------------------------------------------------
                     const Text(
                       'Enter your email to receive an OTP',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
 
                     const SizedBox(height: 45),
@@ -123,16 +114,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                       decoration: const InputDecoration(
                         hintText: 'name@example.com',
-                        hintStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                        hintStyle: TextStyle(color: Colors.white, fontSize: 20),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -140,10 +125,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                            width: 2,
-                          ),
+                          borderSide: BorderSide(color: Colors.white, width: 2),
                         ),
                       ),
                     ),
@@ -155,9 +137,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       width: double.infinity,
                       height: 58,
                       child: ElevatedButton(
-                        onPressed: isLoading
-                            ? null
-                            : sendResetLink,
+                        onPressed: isLoading ? null : sendResetLink,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.dark,
                           disabledBackgroundColor: AppColors.dark,
@@ -167,21 +147,21 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         ),
                         child: isLoading
                             ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
                             : const Text(
-                          'Send OTP',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                                'Send OTP',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                       ),
                     ),
 

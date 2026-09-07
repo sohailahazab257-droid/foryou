@@ -26,7 +26,7 @@ void main() {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: context.watch<AppThemeCubit>().state,
-      home: const Home(),
+      home: const SplashPage(),
     );
   }
 }

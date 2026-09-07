@@ -3,21 +3,21 @@ import 'package:foryou/constants/app_colors.dart';
 import 'package:foryou/services/auth_service.dart';
 import 'package:foryou/screens/reset_password_page.dart';
 import 'dart:ui';
-class OtpScreen extends StatefulWidget {
+class sendotp extends StatefulWidget {
 
   final String email;
 
-  const OtpScreen({
+  const sendotp({
     super.key,
     required this.email,
   });
 
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
+  State<sendotp> createState() => _sendotpState();
 }
 
 
-class _OtpScreenState extends State<OtpScreen> {
+class _sendotpState extends State<sendotp> {
 
   final List<TextEditingController> otpControllers =
   List.generate(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foryou/constants/app_colors.dart';
 import 'package:foryou/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:foryou/screens/verify_email_otp.dart';
+import 'package:foryou/screens/verify_email_screen.dart';
 
 
 class CreateAccountPage extends StatefulWidget {

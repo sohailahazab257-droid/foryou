@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foryou/widgets/product.dart';
 import 'package:foryou/widgets/bar.dart';
 import 'package:foryou/screens/favorit.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, this.userName = ''});
+
+  final String userName;
 
   @override
   State<Home> createState() => _MyAppState();
@@ -12,22 +15,43 @@ class Home extends StatefulWidget {
 
 class _MyAppState extends State<Home> {
   int currentPage = 0;
+  String displayName = 'Guest';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    // لو الاسم اتبعت من اللوجين مباشرة، استخدميه على طول
+    if (widget.userName.isNotEmpty) {
+      setState(() {
+        displayName = widget.userName;
+      });
+      return;
+    }
+
+    // لو مفيش اسم متبعت (مثلاً فتحتي التطبيق وهو already logged in)
+    // جيبي الاسم المحفوظ من الـ SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    final savedName = prefs.getString('user_name');
+
+    if (savedName != null && savedName.isNotEmpty) {
+      setState(() {
+        displayName = savedName;
+      });
+    }
+  }
 
   Widget buildOfferBanner(String image) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          Positioned.fill(
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover,
-            ),
-          ),
+          Positioned.fill(child: Image.asset(image, fit: BoxFit.cover)),
 
           const Positioned(
             left: 23,
@@ -47,10 +71,7 @@ class _MyAppState extends State<Home> {
             top: 72,
             child: Text(
               'Limited Offer',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-              ),
+              style: TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
 
@@ -69,9 +90,7 @@ class _MyAppState extends State<Home> {
               ),
               child: const Text(
                 'SHOP NOW',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -82,6 +101,7 @@ class _MyAppState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -89,9 +109,7 @@ class _MyAppState extends State<Home> {
             Container(
               width: 50,
               height: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
+              decoration: const BoxDecoration(shape: BoxShape.circle),
               child: ClipOval(
                 child: Image.asset(
                   "assets/WhatsApp Image 2026-09-03 at 6.10.41 PM.jpeg",
@@ -102,57 +120,53 @@ class _MyAppState extends State<Home> {
 
             const SizedBox(width: 10),
 
-            const Column(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Welcome Back",
                   style: TextStyle(
-                    color: Color(0xff6a6a6a),
+                    color: theme.textTheme.bodyLarge?.color,
                     fontSize: 15,
                   ),
                 ),
 
                 Text(
-                  "user name",
+                  displayName,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: theme.textTheme.bodyLarge?.color,
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),
                 ),
               ],
             ),
-
-            const Spacer(),
-
-            Container(
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Container(
               width: 50,
               height: 50,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xffd4edff),
-                border: Border.all(
-                  color: const Color(0xff89b9f8),
-                  width: 1,
-                ),
+                color: Colors.white,
+
+                border: Border.all(color: const Color(0xff89b9f8), width: 1),
               ),
               child: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Fav(),
-                    ),
+                    MaterialPageRoute(builder: (context) => Fav()),
                   );
                 },
-                icon: const Icon(
-                  Icons.bookmark,
-                  color: Color(0xff89b9f8),
-                ),
+                icon: const Icon(Icons.bookmark, color: Color(0xff89b9f8)),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -169,30 +183,20 @@ class _MyAppState extends State<Home> {
                 height: 45,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  border: Border.all(
-                    width: 1,
-                    color: const Color(0xff6a6a6a),
-                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  border: Border.all(width: 1, color: const Color(0xff6a6a6a)),
                 ),
                 child: const Row(
                   children: [
                     SizedBox(width: 15),
 
-                    Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
+                    Icon(Icons.search, color: Colors.black),
 
                     SizedBox(width: 10),
 
                     Text(
                       "What's on your list?",
-                      style: TextStyle(
-                        color: Color(0xff6a6a6a),
-                      ),
+                      style: TextStyle(color: Color(0xff6a6a6a)),
                     ),
                   ],
                 ),
@@ -226,27 +230,20 @@ class _MyAppState extends State<Home> {
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  3,
-                      (index) {
-                    return AnimatedContainer(
-                      duration: const Duration(
-                        milliseconds: 250,
-                      ),
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 4,
-                      ),
-                      width: currentPage == index ? 20 : 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: currentPage == index
-                            ? Colors.black
-                            : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    );
-                  },
-                ),
+                children: List.generate(3, (index) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: currentPage == index ? 20 : 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: currentPage == index
+                          ? Colors.black
+                          : Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  );
+                }),
               ),
 
               const SizedBox(height: 20),
@@ -257,9 +254,7 @@ class _MyAppState extends State<Home> {
         ),
       ),
 
-      bottomNavigationBar: const Bar(
-        currentPage: 'home',
-      ),
+      bottomNavigationBar: const Bar(currentPage: 'home'),
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:foryou/widgets/bar.dart';
 import 'package:foryou/screens/login_page.dart';
@@ -6,8 +5,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/app_theme_cubit.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  String displayName = 'Guest';
+  String displayEmail = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final savedName = prefs.getString('user_name');
+    final savedEmail = prefs.getString('user_email');
+
+    setState(() {
+      if (savedName != null && savedName.isNotEmpty) {
+        displayName = savedName;
+      }
+      if (savedEmail != null && savedEmail.isNotEmpty) {
+        displayEmail = savedEmail;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +128,7 @@ class Profile extends StatelessWidget {
                     ),
 
                     Text(
-                      "user name",
+                      displayName,
                       style: TextStyle(
                         color: theme.textTheme.titleLarge?.color,
                         fontWeight: FontWeight.bold,
@@ -108,7 +137,7 @@ class Profile extends StatelessWidget {
                     ),
 
                     Text(
-                      "email",
+                      displayEmail.isNotEmpty ? displayEmail : 'No email',
                       style: TextStyle(
                         color: theme.textTheme.bodyMedium?.color,
                         fontSize: 15,
@@ -301,6 +330,8 @@ class Profile extends StatelessWidget {
                   await SharedPreferences.getInstance();
 
                   await prefs.clear();
+
+                  if (!context.mounted) return;
 
                   Navigator.pushReplacement(
                     context,
