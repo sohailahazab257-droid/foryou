@@ -18,3 +18,4 @@ class AllCategories {
     }).toList();
   }
 }
+

@@ -103,7 +103,6 @@ class Category extends StatelessWidget {
                   hintText: 'Which category you need ?',
                   prefixIcon: const Icon(Icons.search),
 
-                  // 🤍 مربع البحث أبيض
                   filled: true,
                   fillColor: Colors.white,
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:foryou/cubit/app_colors.dart';
 
@@ -25,9 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool obscurePassword = true;
 
-  // LOGIN
   Future<void> login() async {
-    // نتأكد إن البيانات مش فاضية
     if (emailController.text.trim().isEmpty ||
         passwordController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -36,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // نتأكد من صيغة الإيميل
     final email = emailController.text.trim();
 
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -48,51 +44,36 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // Loading
     setState(() {
       isLoading = true;
     });
 
     try {
-      // CALL AUTH SERVICE
       final response = await AuthService.login(
         email,
         passwordController.text.trim(),
       );
 
-      // لو الصفحة اتقفلت أثناء الـrequest
       if (!mounted) return;
 
-      // Shared Preferences
       final prefs = await SharedPreferences.getInstance();
       final fullName = response.name.isNotEmpty ? response.name : 'user';
 
-      // حفظ إن اليوزر عمل Login
       await prefs.setBool('is_logged_in', true);
 
-      // حفظ Access Token
       await prefs.setString('access_token', response.accessToken);
 
       await prefs.setString('user_name', fullName);
       await prefs.setString('user_email', email);
 
-      // Login successful
-      print('LOGIN SUCCESS');
-      print('Access Token: ${response.accessToken}');
-      print('Refresh Token: ${response.refreshToken}');
-      print('LOGIN SUCCESS - BEFORE HOME');
-
       if (!mounted) return;
 
-      // الانتقال للـHome
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Home(userName: fullName)),
       );
     } catch (e) {
       if (!mounted) return;
-
-      print('LOGIN ERROR: $e');
 
       ScaffoldMessenger.of(
         context,
@@ -106,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  // DISPOSE
   @override
   void dispose() {
     emailController.dispose();
@@ -114,14 +94,11 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  // UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // ================= BACKGROUND =================
-
           Positioned.fill(
             child: Image.asset(
               'assets/backgroundForLoginPage.jpeg',
@@ -129,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          // ================= CONTENT =================
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -140,8 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ================= TITLE =================
-
                     const Text(
                       'Log into\nyour account',
                       style: TextStyle(
@@ -154,7 +128,6 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 85),
 
-                    // ================= EMAIL =================
                     const Text(
                       'Username / Email',
                       style: TextStyle(color: Colors.white, fontSize: 18),
@@ -181,7 +154,6 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 50),
 
-                    // ================= PASSWORD =================
                     const Text(
                       'Password',
                       style: TextStyle(color: Colors.white, fontSize: 18),
@@ -204,7 +176,6 @@ class _LoginPageState extends State<LoginPage> {
                           borderSide: BorderSide(color: Colors.white, width: 2),
                         ),
 
-                        // EYE ICON
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
@@ -224,7 +195,6 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 25),
 
-                    // ================= REMEMBER ME =================
                     Row(
                       children: [
                         Checkbox(
@@ -252,7 +222,6 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
 
-                    // ================= FORGOT PASSWORD =================
                     Center(
                       child: TextButton(
                         onPressed: () {
@@ -277,7 +246,6 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 15),
 
-                    // ================= LOGIN BUTTON =================
                     SizedBox(
                       width: double.infinity,
                       height: 60,
@@ -312,7 +280,6 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 35),
 
-                    // ================= FACEBOOK =================
                     SizedBox(
                       width: double.infinity,
                       height: 60,
@@ -353,7 +320,6 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 30),
 
-                    // ================= SIGN UP =================
                     Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

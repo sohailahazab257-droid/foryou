@@ -1,5 +1,5 @@
 import 'package:foryou/helper/api.dart';
-import 'package:foryou/models/product_model.dart';
+
 
 class AllPorducts {
   Future<List<dynamic>> get_all_products() async {

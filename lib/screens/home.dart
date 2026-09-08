@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foryou/widgets/buildofferbanner.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foryou/widgets/product.dart';
 import 'package:foryou/widgets/bar.dart';
@@ -24,7 +26,6 @@ class _MyAppState extends State<Home> {
   }
 
   Future<void> _loadUserName() async {
-    // لو الاسم اتبعت من اللوجين مباشرة، استخدميه على طول
     if (widget.userName.isNotEmpty) {
       setState(() {
         displayName = widget.userName;
@@ -32,8 +33,6 @@ class _MyAppState extends State<Home> {
       return;
     }
 
-    // لو مفيش اسم متبعت (مثلاً فتحتي التطبيق وهو already logged in)
-    // جيبي الاسم المحفوظ من الـ SharedPreferences
     final prefs = await SharedPreferences.getInstance();
     final savedName = prefs.getString('user_name');
 
@@ -42,61 +41,6 @@ class _MyAppState extends State<Home> {
         displayName = savedName;
       });
     }
-  }
-
-  Widget buildOfferBanner(String image) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
-      clipBehavior: Clip.antiAlias,
-      child: Stack(
-        children: [
-          Positioned.fill(child: Image.asset(image, fit: BoxFit.cover)),
-
-          const Positioned(
-            left: 23,
-            top: 30,
-            child: Text(
-              'GET 30% OFF',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-
-          const Positioned(
-            left: 25,
-            top: 72,
-            child: Text(
-              'Limited Offer',
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            ),
-          ),
-
-          Positioned(
-            left: 25,
-            bottom: 25,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              child: const Text(
-                'SHOP NOW',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -213,14 +157,17 @@ class _MyAppState extends State<Home> {
                     });
                   },
                   children: [
-                    buildOfferBanner(
-                      "assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg",
+                    Buildofferbanner(
+                      image:
+                          "assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg",
                     ),
-                    buildOfferBanner(
-                      "assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg",
+                    Buildofferbanner(
+                      image:
+                          "assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg",
                     ),
-                    buildOfferBanner(
-                      "assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg",
+                    Buildofferbanner(
+                      image:
+                          "assets/WhatsApp Image 2026-09-03 at 10.19.17 PM.jpeg",
                     ),
                   ],
                 ),

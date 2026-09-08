@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+
 import '../models/login_response_model.dart';
 import 'api_services.dart';
 
 class AuthService {
-  //LOGIN---------------------------------------------------
+
 
   static Future<LoginResponse> login(
       String email,
@@ -16,15 +16,9 @@ class AuthService {
         'password': password,
       },
     );
-
-    print('LOGIN STATUS: ${response.statusCode}');
-    print('LOGIN RESPONSE: ${response.data}');
-
     return LoginResponse.fromJson(response.data);
   }
 
-
-  //REGISTER----------------------------------------------------
 
   static Future<void> register(
       String email,
@@ -43,7 +37,7 @@ class AuthService {
     );
   }
 
-  //FORGOT PASSWORD ---------------------------------------
+  
 
   static Future<void> forgotPassword(String email) async {
     await ApiServices.dio.post(
@@ -54,7 +48,7 @@ class AuthService {
     );
   }
 
-  // VALIDATE OTP-------------------------------------------------------------
+ 
 
   static Future<void> validateOtp(
       String email,
@@ -68,7 +62,7 @@ class AuthService {
       },
     );
   }
-//email
+
   static Future<void> verifyEmail(
       String email,
       String otp,
@@ -82,7 +76,6 @@ class AuthService {
     );
   }
 
-  //RESEND OTP=---------------------------------------------
 
   static Future<void> resendOtp(String email) async {
     await ApiServices.dio.post(
@@ -94,7 +87,6 @@ class AuthService {
   }
 
 
-  //RESET PASSWORD-------------------------------------------------
 
   static Future<void> resetPassword(
       String email,

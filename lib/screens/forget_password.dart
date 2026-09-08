@@ -73,10 +73,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Background----------------------------------------------------------------------------
           Image.asset('assets/backgroundForLoginPage.jpeg', fit: BoxFit.cover),
 
-          // Content----------------------------------------------------------------------------------
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -88,7 +86,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   children: [
                     const SizedBox(height: 70),
 
-                    // Forgot Password---------------------------------------------------------------
                     const Text(
                       'Forgot Password?',
                       textAlign: TextAlign.center,
@@ -100,8 +97,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
 
                     const SizedBox(height: 10),
-                    //--------------------------------------------------------------------------------------
-                    // Description-----------------------------------------------------------------------
+
                     const Text(
                       'Enter your email to receive an OTP',
                       textAlign: TextAlign.center,
@@ -110,7 +106,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                     const SizedBox(height: 45),
 
-                    // Email--------------------------------------------------------------------------------
                     TextField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -133,7 +128,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                     const SizedBox(height: 40),
 
-                    // Send OTP--------------------------------------------------------------------------------------
                     SizedBox(
                       width: double.infinity,
                       height: 58,
@@ -168,7 +162,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                     const SizedBox(height: 28),
 
-                    // Back to Login-------------------------------------------------------------------------------------
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
