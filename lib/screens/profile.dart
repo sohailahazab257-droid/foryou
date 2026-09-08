@@ -66,11 +66,11 @@ class _ProfileState extends State<Profile> {
           image: isDark
               ? null
               : const DecorationImage(
-            image: AssetImage(
-              "assets/WhatsApp Image 2026-09-03 at 10.39.56 PM.jpeg",
-            ),
-            repeat: ImageRepeat.repeat,
-          ),
+                  image: AssetImage(
+                    "assets/WhatsApp Image 2026-09-03 at 10.39.56 PM.jpeg",
+                  ),
+                  repeat: ImageRepeat.repeat,
+                ),
         ),
 
         child: SingleChildScrollView(
@@ -78,10 +78,7 @@ class _ProfileState extends State<Profile> {
             children: [
               const SizedBox(height: 20),
 
-
               // Profile Card
-
-
               Container(
                 width: 550,
                 height: 210,
@@ -93,14 +90,8 @@ class _ProfileState extends State<Profile> {
                     end: Alignment.bottomCenter,
 
                     colors: isDark
-                        ? [
-                      const Color(0xff303030),
-                      const Color(0xff202020),
-                    ]
-                        : [
-                      const Color(0xFF89b9f8),
-                      Colors.white,
-                    ],
+                        ? [const Color(0xff303030), const Color(0xff202020)]
+                        : [const Color(0xFF89b9f8), Colors.white],
                   ),
 
                   borderRadius: BorderRadius.circular(30),
@@ -115,9 +106,7 @@ class _ProfileState extends State<Profile> {
                       width: 80,
                       height: 80,
 
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
 
                       child: ClipOval(
                         child: Image.asset(
@@ -160,11 +149,7 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 18,
-                            ),
+                            Icon(Icons.edit, color: Colors.white, size: 18),
 
                             SizedBox(width: 5),
 
@@ -185,22 +170,12 @@ class _ProfileState extends State<Profile> {
 
               const SizedBox(height: 20),
 
-
               // Language
-
-
-              _profileOption(
-                context,
-                icon: Icons.language,
-                title: "Language",
-              ),
+              _profileOption(context, icon: Icons.language, title: "Language"),
 
               const SizedBox(height: 5),
 
-
               // Notification
-
-
               _profileOption(
                 context,
                 icon: Icons.notifications,
@@ -209,22 +184,12 @@ class _ProfileState extends State<Profile> {
 
               const SizedBox(height: 5),
 
-
               // Payment
-
-
-              _profileOption(
-                context,
-                icon: Icons.payment,
-                title: "Payment",
-              ),
+              _profileOption(context, icon: Icons.payment, title: "Payment"),
 
               const SizedBox(height: 5),
 
-
               // Dark Mode
-
-
               Container(
                 width: 400,
                 height: 45,
@@ -235,9 +200,7 @@ class _ProfileState extends State<Profile> {
 
                   boxShadow: [
                     BoxShadow(
-                      color: isDark
-                          ? Colors.black54
-                          : Colors.white,
+                      color: isDark ? Colors.black54 : Colors.white,
                       blurRadius: 0.5,
                     ),
                   ],
@@ -249,10 +212,7 @@ class _ProfileState extends State<Profile> {
                   children: [
                     const SizedBox(width: 5),
 
-                    Icon(
-                      Icons.dark_mode,
-                      color: theme.iconTheme.color,
-                    ),
+                    Icon(Icons.dark_mode, color: theme.iconTheme.color),
 
                     const SizedBox(width: 10),
 
@@ -268,13 +228,11 @@ class _ProfileState extends State<Profile> {
 
                     Switch(
                       value:
-                      context.watch<AppThemeCubit>().state ==
+                          context.watch<AppThemeCubit>().state ==
                           ThemeMode.dark,
 
                       onChanged: (value) {
-                        context
-                            .read<AppThemeCubit>()
-                            .toggleTheme();
+                        context.read<AppThemeCubit>().toggleTheme();
                       },
                     ),
 
@@ -285,10 +243,7 @@ class _ProfileState extends State<Profile> {
 
               const SizedBox(height: 25),
 
-
               // Privacy & Policy
-
-
               _profileOption(
                 context,
                 icon: Icons.privacy_tip,
@@ -297,64 +252,43 @@ class _ProfileState extends State<Profile> {
 
               const SizedBox(height: 5),
 
-
               // About Us
-
-
-              _profileOption(
-                context,
-                icon: Icons.info,
-                title: "About Us",
-              ),
+              _profileOption(context, icon: Icons.info, title: "About Us"),
 
               const SizedBox(height: 5),
 
-
               // Contact Us
-
-              _profileOption(
-                context,
-                icon: Icons.phone,
-                title: "Contact Us",
-              ),
+              _profileOption(context, icon: Icons.phone, title: "Contact Us"),
 
               const SizedBox(height: 25),
 
-
-              // Logout
-
-
               GestureDetector(
                 onTap: () async {
-                  final prefs =
-                  await SharedPreferences.getInstance();
+                  final prefs = await SharedPreferences.getInstance();
 
+                  // مسح كل البيانات المحفوظة
                   await prefs.clear();
 
                   if (!context.mounted) return;
 
+                  // الرجوع لصفحة تسجيل الدخول
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
 
                 child: Container(
                   width: 400,
                   height: 45,
-                  margin:
-                  const EdgeInsets.symmetric(horizontal: 16),
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
 
                   decoration: BoxDecoration(
                     color: theme.cardColor,
 
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? Colors.black54
-                            : Colors.black,
+                        color: isDark ? Colors.black54 : Colors.black,
                         blurRadius: 0.5,
                       ),
                     ],
@@ -366,19 +300,13 @@ class _ProfileState extends State<Profile> {
                     children: [
                       const SizedBox(width: 5),
 
-                      const Icon(
-                        Icons.arrow_circle_left,
-                        color: Colors.red,
-                      ),
+                      const Icon(Icons.arrow_circle_left, color: Colors.red),
 
                       const SizedBox(width: 10),
 
                       const Text(
                         "Logout",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 20,
-                        ),
+                        style: TextStyle(color: Colors.red, fontSize: 20),
                       ),
 
                       const Spacer(),
@@ -400,9 +328,7 @@ class _ProfileState extends State<Profile> {
         ),
       ),
 
-      bottomNavigationBar: const Bar(
-        currentPage: 'profile',
-      ),
+      bottomNavigationBar: const Bar(currentPage: 'profile'),
     );
   }
 
@@ -411,10 +337,10 @@ class _ProfileState extends State<Profile> {
   // =========================
 
   Widget _profileOption(
-      BuildContext context, {
-        required IconData icon,
-        required String title,
-      }) {
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+  }) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -428,9 +354,7 @@ class _ProfileState extends State<Profile> {
 
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? Colors.black54
-                : Colors.black,
+            color: isDark ? Colors.black54 : Colors.black,
             blurRadius: 0.5,
           ),
         ],
@@ -442,10 +366,7 @@ class _ProfileState extends State<Profile> {
         children: [
           const SizedBox(width: 5),
 
-          Icon(
-            icon,
-            color: theme.iconTheme.color,
-          ),
+          Icon(icon, color: theme.iconTheme.color),
 
           const SizedBox(width: 10),
 
@@ -459,10 +380,7 @@ class _ProfileState extends State<Profile> {
 
           const Spacer(),
 
-          Icon(
-            Icons.arrow_forward_ios,
-            color: theme.iconTheme.color,
-          ),
+          Icon(Icons.arrow_forward_ios, color: theme.iconTheme.color),
 
           const SizedBox(width: 10),
         ],

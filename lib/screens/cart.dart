@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foryou/constants/app_colors.dart';
+
+import 'package:foryou/cubit/app_colors.dart';
 import 'package:foryou/models/product_model.dart';
 import 'package:foryou/screens/product_details.dart';
 import 'package:foryou/services/cart_store.dart';

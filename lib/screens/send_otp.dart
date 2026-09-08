@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foryou/constants/app_colors.dart';
+
+import 'package:foryou/cubit/app_colors.dart';
 import 'package:foryou/services/auth_service.dart';
 import 'package:foryou/screens/reset_password_page.dart';
 import 'dart:ui';

@@ -1,5 +1,6 @@
-import 'package:foryou/constants/app_colors.dart';
+
 import 'package:flutter/material.dart';
+import 'package:foryou/cubit/app_colors.dart';
 
 import 'package:foryou/screens/create_account_page.dart';
 import 'package:foryou/screens/home.dart';
